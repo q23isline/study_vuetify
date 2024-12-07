@@ -1,0 +1,16 @@
+# https://docs.docker.jp/compose/compose-file/index.html
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: ./docker/local/node/Dockerfile
+    container_name: frontend
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend:/frontend
+      - ./logs/frontend:/root/.npm/_logs
+    # シェルプロセスを内部で起動することでコンテナをすぐ終了させないようにする
+    stdin_open: true
+    tty: true
