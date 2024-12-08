@@ -244,3 +244,8 @@ $RECYCLE.BIN/
 
 # SAM ビルドの結果は無視する
 .aws-sam
+
+# ログファイル
+!logs/
+logs/*
+!logs/.gitkeep
