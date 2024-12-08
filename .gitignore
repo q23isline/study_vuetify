@@ -4,6 +4,11 @@
 !/logs/frontend/
 /logs/frontend/*
 !/logs/frontend/.gitkeep
+!/backend/
+/backend/*
+!/backend/logs/
+/backend/logs/*
+!/backend/logs/.gitkeep
 
 # VSCode 設定
 !/.vscode/
