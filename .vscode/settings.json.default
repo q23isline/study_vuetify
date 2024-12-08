@@ -9,5 +9,44 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.rulers": [120],
+  // Docker コンテナで用意した Python をベースに VSCode に認識させる
+  "python.defaultInterpreterPath": "backend/.venv/bin/python",
+  // Docker コンテナで用意したライブラリたちを VSCode に認識させる
+  "python.analysis.extraPaths": [
+    "backend/.venv/lib/python3.13/site-packages",
+    "backend/.venv/lib64/python3.13/site-packages"
+  ],
+  // VSCode 上で Docker コンテナで用意したライブラリを使ってフォーマッターを動かす
+  "autopep8.args": ["--global-config=backend/.pep8"],
+  "autopep8.interpreter": ["python"],
+  "autopep8.path": ["autopep8"],
+  "autopep8.importStrategy": "fromEnvironment",
+  "black-formatter.interpreter": ["python"],
+  "black-formatter.path": ["black"],
+  "black-formatter.importStrategy": "fromEnvironment",
+  // VSCode 上で Docker コンテナで用意したライブラリを使ってリンターを動かす
+  "flake8.args": ["--config=backend/.flake8"],
+  "flake8.interpreter": ["python"],
+  "flake8.path": ["flake8"],
+  "flake8.importStrategy": "fromEnvironment",
+  "pylint.args": ["--rcfile=backend/.pylintrc"],
+  "pylint.interpreter": ["python"],
+  "pylint.path": ["pylint"],
+  "pylint.importStrategy": "fromEnvironment",
+  "mypy-type-checker.args": ["--config-file=backend/mypy.ini"],
+  "mypy-type-checker.interpreter": ["python"],
+  "mypy-type-checker.path": ["mypy"],
+  "mypy-type-checker.importStrategy": "fromEnvironment",
+  "mypy-type-checker.showNotifications": "always",
+
+  // strict はデフォルトの hello_world の AWS Lambda メソッドでエラーを報告しすぎるので standard にする
+  "python.analysis.typeCheckingMode": "standard",
+  "python.analysis.diagnosticSeverityOverrides": {
+    // 呼び出しターゲットに渡される呼び出し式および引数に関連する診断を抑制する
+    // Lambda 呼び出すデコーレータでエラーを報告させない
+    "reportCallIssue": "none"
+  },
+  "python.analysis.autoImportCompletions": true
 }
