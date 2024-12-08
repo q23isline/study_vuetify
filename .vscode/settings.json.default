@@ -9,5 +9,11 @@
     "source.fixAll.eslint": "explicit"
   },
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "flake8.args": [
+    "--config=backend/.flake8"
+  ],
+  "pylint.args": [
+    "--rcfile=backend/.pylintrc"
+  ]
 }
