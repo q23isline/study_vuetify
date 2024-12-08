@@ -2,7 +2,14 @@
 
 ## フロントエンド開発ガイドライン
 
-### ビルド
+### 静的解析単体実行する
+
+```bash
+docker compose exec frontend npm run type-check
+docker compose exec frontend npm run lint
+```
+
+### ビルドする
 
 ```bash
 docker compose exec frontend npm run build
@@ -10,7 +17,9 @@ docker compose exec frontend npm run build
 sudo chmod -R ogu+rw frontend/dist
 ```
 
-### ライブラリインストール
+### ライブラリをインストールする
+
+インストール済のライブラリは `frontend/package.json` 参照
 
 ライブラリ一覧
 

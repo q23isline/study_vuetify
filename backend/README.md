@@ -1,5 +1,93 @@
 # study_vuetify
 
+## バックエンド開発ガイドライン
+
+### 静的解析単体実行する
+
+```bash
+# リポジトリのカレントディレクトリ
+pwd
+# /xxx/xxx/study_vuetify
+
+# フォーマッター
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- autopep8 --diff . --global-config=.pep8
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- black --diff .
+
+# リンター
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- pylint ./ --rcfile=.pylintrc
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- flake8 --config=.flake8
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- mypy ./ --config-file=mypy.ini
+```
+
+#### フォーマッターに自動修正させる
+
+```bash
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- autopep8 -i -a -a . --global-config=.pep8
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv run -- black .
+```
+
+### AWS SAM テンプレートを検証する
+
+```bash
+cd backend
+sam validate --lint
+```
+
+### デプロイする
+
+```bash
+cd backend
+sam deploy --guided
+```
+
+### ライブラリをインストールする
+
+以下の手順をすべて実施する
+
+インストール済のライブラリは `backend/pyproject.toml` 参照
+
+#### VSCode に新しいライブラリを認識させる
+
+ライブラリ一覧
+
+<https://pypi.org/>
+
+```bash
+# リポジトリのカレントディレクトリ
+pwd
+# /xxx/xxx/study_vuetify
+
+docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv add ｛ライブラリ名｝
+# pylint をインストールする例
+# docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv add pylint
+
+# インストールしたライブラリに実行権限を含めた全権限を与える
+sudo chmod -R 777 backend/.venv
+```
+
+※ VSCode の拡張機能を新しくインストールし、それに対応するライブラリをインストールしても認識しない場合、`.vscode/settings.json` で実行バイナリ（`backend/.venv/bin`）のパスを指定するなどの対応も必要
+
+※ VSCode を再起動することで反映されることもある
+
+#### AWS SAM でライブラリを実行できるようにする
+
+1. ライブラリを実行したい API のあるフォルダの `requirements.txt` にライブラリを追記する  
+例） `backend/hello_world/requirements.txt`  
+バージョンを指定することも可能（`requirements.txt`）
+
+    ```txt
+    requests==2.32.3
+    ```
+
+2. ビルドする
+
+    ```bash
+    cd backend
+    sam build --use-container
+    ```
+
+---
+
 Congratulations, you have just created a Serverless "Hello World" application using the AWS Serverless Application Model (AWS SAM) for the `python3.13` runtime, and options to bootstrap it with [**AWS Lambda Powertools for Python**](https://awslabs.github.io/aws-lambda-powertools-python/latest/) (Lambda Powertools) utilities for Logging, Tracing and Metrics.
 
 Powertools is a developer toolkit to implement Serverless best practices and increase developer velocity.
