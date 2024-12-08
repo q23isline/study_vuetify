@@ -16,7 +16,7 @@
         </div>
 
         <h1 class="text-h2 font-weight-bold">
-          Vuetify
+          Vuetify {{ data?.message }}
         </h1>
       </div>
 
@@ -159,5 +159,22 @@
 </template>
 
 <script setup lang="ts">
-  //
+import { AppApi } from '@/api/AppApi'
+import { ref, onMounted } from 'vue'
+type ApiResponse = {
+  message: string
+}
+const data = ref<ApiResponse>()
+const loading = ref(true)
+const error = ref<string | null>(null)
+onMounted(async () => {
+  try {
+    const response = await AppApi.get<ApiResponse>('/hello')
+    data.value = response.data
+  } catch (err) {
+    error.value = (err as Error).message
+  } finally {
+    loading.value = false
+  }
+})
 </script>
