@@ -241,3 +241,6 @@ $RECYCLE.BIN/
 */build/*
 
 # End of https://www.gitignore.io/api/osx,linux,python,windows,pycharm,visualstudiocode
+
+# SAM ビルドの結果は無視する
+.aws-sam
