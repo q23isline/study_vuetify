@@ -1,0 +1,4 @@
+; https://flake8.pycqa.org/en/latest/user/options.html
+[flake8]
+; 79文字制限はキツすぎるので 120文字に拡張
+max-line-length = 120
