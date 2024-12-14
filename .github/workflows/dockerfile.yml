@@ -17,11 +17,15 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - name: Lint Dockerfile (Local dotnet)
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: "./docker/local/dotnet/Dockerfile"
+      - name: Lint Dockerfile (Prod dotnet)
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: "./docker/prod/dotnet/Dockerfile"
       - name: Lint Dockerfile (Local node)
         uses: hadolint/hadolint-action@master
         with:
           dockerfile: "./docker/local/node/Dockerfile"
-      - name: Lint Dockerfile (Local python)
-        uses: hadolint/hadolint-action@master
-        with:
-          dockerfile: "./docker/local/python/Dockerfile"
