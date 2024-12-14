@@ -1,6 +1,9 @@
 # study_vuetify
 
 [![LICENSE](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
+[![GitHub Actions Backend](https://github.com/q23isline/study_vuetify/actions/workflows/python.yml/badge.svg)](https://github.com/q23isline/study_vuetify/actions/workflows/python.yml)
+[![GitHub Actions Frontend](https://github.com/q23isline/study_vuetify/actions/workflows/nodejs.yml/badge.svg)](https://github.com/q23isline/study_vuetify/actions/workflows/nodejs.yml)
+[![GitHub Actions Dockerfile](https://github.com/q23isline/study_vuetify/actions/workflows/dockerfile.yml/badge.svg)](https://github.com/q23isline/study_vuetify/actions/workflows/dockerfile.yml)
 [![Open in Visual Studio Code](https://img.shields.io/static/v1?logo=visualstudiocode&label=&message=Open%20in%20Visual%20Studio%20Code&labelColor=555555&color=007acc&logoColor=007acc)](https://open.vscode.dev/q23isline/study_vuetify)
 
 [![Python](https://img.shields.io/static/v1?logo=python&label=Python&message=v3.13&labelColor=555555&color=3776AB&logoColor=3776AB)](https://www.python.org/)
