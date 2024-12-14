@@ -1,0 +1,9 @@
+; https://pypi.org/project/autopep8/
+[pep8]
+; 79文字制限はキツすぎるので 120文字に拡張
+max_line_length = 120
+
+exclude = .aws-sam,tests,.venv
+
+; 再帰的にファイルをチェックする
+recursive = true
