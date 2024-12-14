@@ -1,0 +1,27 @@
+# <https://github.com/hadolint/hadolint/blob/master/docs/INTEGRATION.md#github-actions>
+name: Lint Dockerfile
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+    paths:
+      - "**/Dockerfile"
+  pull_request:
+    branches: [ "main", "develop" ]
+    paths:
+      - "**/Dockerfile"
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Lint Dockerfile (Local node)
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: "./docker/local/node/Dockerfile"
+      - name: Lint Dockerfile (Local python)
+        uses: hadolint/hadolint-action@master
+        with:
+          dockerfile: "./docker/local/python/Dockerfile"

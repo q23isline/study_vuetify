@@ -1,0 +1,43 @@
+name: Python
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+    paths:
+      - "backend/**"
+  pull_request:
+    branches: [ "main", "develop" ]
+    paths:
+      - "backend/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install uv package
+      run: |
+        curl -LsSf https://astral.sh/uv/install.sh | sh
+        echo "PATH=$PATH:/root/.local/bin" >> $GITHUB_ENV
+    - name: Install dependencies
+      run: uv sync
+    - name: Formatter by autopep8
+      run: uv run autopep8 --diff . --global-config=.pep8
+    - name: Formatter by Black Formatter
+      run: uv run black --diff .
+    - name: Linter by Pylint
+      run: uv run pylint ./ --rcfile=.pylintrc
+    - name: Linter by Flake8
+      run: uv run flake8 --config=.flake8
+    - name: Linter by Mypy
+      run: uv run mypy ./ --config-file=mypy.ini
