@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/node/tags
-FROM node:22.12
+FROM node:23.4
 
 WORKDIR /frontend
 
