@@ -46,6 +46,7 @@ Vuetify 勉強用リポジトリ
 
     ```bash
     cp .vscode/settings.json.default .vscode/settings.json
+    cp .vscode/launch.json.default .vscode/launch.json
     ```
 
 4. アプリ立ち上げ
