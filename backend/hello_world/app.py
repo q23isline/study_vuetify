@@ -1,3 +1,6 @@
+"""/hello系API"""
+
+from typing import Any
 from aws_lambda_powertools.event_handler import APIGatewayRestResolver
 from aws_lambda_powertools.event_handler.api_gateway import CORSConfig
 from aws_lambda_powertools.utilities.typing import LambdaContext
@@ -17,7 +20,12 @@ metrics = Metrics(namespace="Powertools")
 
 @app.get("/hello")
 @tracer.capture_method
-def hello():
+def hello() -> dict[str, str]:
+    """
+    hello
+
+    :return: dict[str, str]
+    """
     # adding custom metrics
     # See: https://awslabs.github.io/aws-lambda-powertools-python/latest/core/metrics/
     metrics.add_metric(name="HelloWorldInvocations", unit=MetricUnit.Count, value=1)
@@ -35,5 +43,12 @@ def hello():
 @tracer.capture_lambda_handler
 # ensures metrics are flushed upon request completion/failure and capturing ColdStart metric
 @metrics.log_metrics(capture_cold_start_metric=True)
-def lambda_handler(event: dict, context: LambdaContext) -> dict:
+def lambda_handler(event: dict[Any, Any], context: LambdaContext) -> dict[str, Any]:
+    """
+    lambda_handler
+
+    :param event: dict[Any, Any] dict
+    :param context: LambdaContext LambdaContext
+    :return: dict[str, Any]
+    """
     return app.resolve(event, context)
