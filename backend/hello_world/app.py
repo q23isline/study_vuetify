@@ -10,6 +10,8 @@ from aws_lambda_powertools import Tracer
 from aws_lambda_powertools import Metrics
 from aws_lambda_powertools.metrics import MetricUnit
 
+# GitHub Actions の動作確認用のコミットのためのコメント
+
 # TODO: ローカル環境用に CORS すべて許可しているので環境変数などで制御できるようにする
 cors_config = CORSConfig(allow_origin="*")
 app = APIGatewayRestResolver(cors=cors_config)

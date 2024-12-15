@@ -1,6 +1,8 @@
 FROM python:3.13
 WORKDIR /backend
 
+# GitHub Actions の動作確認用のコミットのためのコメント
+
 # タイムゾーンを日本にする
 ENV TZ=Asia/Tokyo
 
