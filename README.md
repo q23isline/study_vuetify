@@ -56,6 +56,7 @@ Vuetify 勉強用リポジトリ
     docker compose up -d
     # ライブラリインストール
     docker compose exec frontend npm install
+    docker build -t study_vuetify-backend -f docker/local/python/Dockerfile backend
     docker run -it --rm -v $(pwd)/backend:/backend study_vuetify-backend uv sync
 
     # エディタがライブラリを実行できるように実行権限を含めた全権限を与える
